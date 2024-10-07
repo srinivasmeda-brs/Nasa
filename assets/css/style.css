@@ -1,0 +1,331 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('https://www.expenseanywhere.com/wp-content/uploads/2016/09/website-backgrounds-E280AB1E280AC-E280ABE280AC.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*background-color: green;*/
+}
+
+.container {
+    display: flex;
+    /*align-items: center;
+  justify-content: center;*/
+    /* min-height: 100vh; */
+    flex-direction: column;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 15px 15px;
+}
+
+.input-search {
+    width: 100%;
+    max-width: 320px;
+    padding: 10px 15px;
+    background-color: lightgray;
+    outline: none;
+    border-radius: 20px 8px 20px 8px;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    border: 2px solid black;
+    font-weight: 400;
+    /*transition: 0.2s ease-out;*/
+}
+
+.input-search:focus {
+    background-color: ghostwhite;
+}
+
+.box {
+    flex: 1 1 100%;
+    padding: 25px 25px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /*justify-content: center;*/
+}
+
+.location-city {
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 15px;
+}
+
+.location-date {
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.temperature-temp {
+    font-family: serif;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+span {
+    font-weight: 500;
+}
+
+.temperature-type {
+    font-family: 'Dosis', sans-serif;
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.temperature-range {
+    font-family: cursive;
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.heading {
+    text-align: center;
+    margin-top: 0px;
+    font-size: 40px;
+    margin-bottom: -10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600
+}
+
+/* Header Styles
+  -------------------------------------------------- */
+
+
+body {
+    background: url("../img/BG.png");
+    background-size: cover;
+}
+
+header .navbar {
+    padding: 20px 0 0;
+}
+
+header .navbar-brand {
+    padding: 0;
+    z-index: 1;
+    width: 213px;
+    height: 109px;
+    background-color: var(--primary-color) ;
+    border-radius: 0;
+}
+
+header .navbar-brand img {
+    width: 56px;
+}
+
+img {
+    max-width: 100%;
+}
+
+header h3 {
+    font: normal normal 600 18px/27px Oswald;
+    color: #fff;
+}
+
+header h4 {
+    font: normal normal 600 18px/28px Oswald;
+    letter-spacing: 0.36px;
+    color: #191919;
+    text-transform: uppercase;
+}
+
+header p {
+    font: 600 12px/15px Poppins;
+    letter-spacing: 0.24px;
+    color: #191919;
+}
+
+.ReactTitle {
+    background-color: #838383;
+    height: 50px;
+    font: normal normal 600 19px/27px Oswald;
+    letter-spacing: 0.38px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.ReactTitle img {
+    width: 25px;
+    margin-right: 10px;
+}
+
+
+.link {
+    background-color: rgba(0, 0, 0, 0.09);
+    font: normal normal medium 12px/15px Poppins;
+    letter-spacing: 0.24px;
+    height: 40px;
+    padding: 10px 10px;
+
+}
+
+.link a {
+    color: #055BA6;
+
+}
+
+/* Sticky footer styles
+  -------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px;
+    /* Vertically center the text there */
+    background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+  -------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body>.container {
+    padding: 60px 15px 0;
+}
+
+.footer>.container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+
+.footer-dark {
+    background-color: var(--primary-color) ;
+    color: #fff;
+}
+
+.toggle-currency {
+    font-size: 20px;
+}
+
+footer {
+    font: normal normal 600 12px/19px Oswald;
+    letter-spacing: 0.24px;
+    color: #FFFFFF;
+}
+
+.theme-switch {
+    margin: 0 5px;
+    padding: 10px;
+    font-size: 0.5rem;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.theme-switch-chathams_blue {
+    background-color: var(--chathams_blue);
+}
+
+.theme-switch-chathams_blue:hover {
+  box-shadow: 2px 2px 2px var(--chathams_blue);
+}
+
+.theme-switch-tamarillo {
+    background-color: var(--tamarillo);
+}
+
+.theme-switch-tamarillo:hover {
+  box-shadow: 2px 2px 2px var(--tamarillo);
+}
+
+.theme-switch-yellow_sea {
+    background-color: var(--yellow_sea);
+}
+
+.theme-switch-yellow_sea:hover {
+  box-shadow: 2px 2px 2px var(--yellow_sea);
+}
+
+.selections {
+    /* width: 600px; */
+    float: left;
+}
+.map {
+    height: 60vh;
+    width: 100%;
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+}
+.btn-search, .btn-search:hover .btn-search:active .btn-search:focus-visible{
+    background-color: var(--primary-color) !important;
+}
+
+#eventList {
+    padding-inline-start: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    grid-gap: 20px;
+}
+
+.event {
+    list-style-type: none;
+    background-color: #eaeaea;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    grid-template-areas: 'name image' 'house image' 'actor image' 'ancestry image' 'dateOfBirth image';
+    text-align: left;
+}
+
+.event>img {
+    max-height: 200px;
+    grid-area: image;
+}
+
+.event-desc{
+    margin-right: 6px;
+}
+
+.w-48{
+    width: 48%!important;
+}
+.w-90{
+    width: 90%!important;
+}
+.mapboxgl-popup-content .mapboxgl-popup-close-button {
+    margin: 15px 15px 0px 0px;
+    padding: 0px 5px;
+    border: 1px solid gray;
+}
+.mapboxgl-popup-content{
+    width: fit-content;
+}
