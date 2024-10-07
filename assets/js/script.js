@@ -12,8 +12,8 @@
      "AVO", "ABFIRE", "AU_BOM", "BYU_ICE", "BCWILDFIRE", "CALFIRE",
      "CEMS", "EO", "FEMA", "FloodList", "GDACS", "GLIDE", "InciWeb",
      "IDC", "JTWC", "MRR", "MBFIRE", "NASA_ESRS", "NASA_DISP",
-     "NASA_HURR", "NOAA_NHC", "NOAA_CPC", "PDC", "ReliefWeb", 
-     "SIVolcano", "NATICE", "UNISYS", "USGS_EHP", "USGS_CMT", 
+     "NASA_HURR", "NOAA_NHC", "NOAA_CPC", "PDC", "ReliefWeb",
+     "SIVolcano", "NATICE", "UNISYS", "USGS_EHP", "USGS_CMT",
      "HDDS", "DFES_WA"
  ];
  
@@ -33,73 +33,69 @@
  let markerList = [];
  let geoData = [];
  let event_title;
- let workingEoNetEvents = ['Sea and Lake Ice','Volcanoes','Wildfires']
+ let workingEoNetEvents = ['Sea and Lake Ice', 'Volcanoes', 'Wildfires'];
  
- document.addEventListener('DOMContentLoaded', () => {
+ $(document).ready(() => {
      initializeDatePicker();
      fetchEvents();
      fetchCategories();
  });
  
  function initializeDatePicker() {
-     const datepickers = document.querySelectorAll(".datepicker");
-     datepickers.forEach(datepicker => {
-         datepicker.addEventListener('focus', () => {
-             const picker = new Pikaday({ // Assuming you have included Pikaday for date selection
-                 field: datepicker,
-                 format: 'YYYY-MM-DD',
-                 yearRange: [1900, new Date().getFullYear()],
-                 onSelect: function(date) {
-                     datepicker.value = this.getMoment().format('YYYY-MM-DD');
-                 }
-             });
-             picker.show();
+     $(".datepicker").focus(function() {
+         const datepicker = this;
+         const picker = new Pikaday({ // Assuming you have included Pikaday for date selection
+             field: datepicker,
+             format: 'YYYY-MM-DD',
+             yearRange: [1900, new Date().getFullYear()],
+             onSelect: function(date) {
+                 datepicker.value = this.getMoment().format('YYYY-MM-DD');
+             }
          });
+         picker.show();
      });
  }
  
  function fetchCategories() {
-    fetch(nasa_eonet_endpoint + "/categories")
-        .then(response => response.json())
-        .then(data => {
-            const eventList = document.getElementById("eventList");
-            eventList.innerHTML = '';
-
-            // Use filter to find matching events
-            const filteredCategories = data.categories.filter(event => 
-                workingEoNetEvents.includes(event.title)
-            );
-
-            filteredCategories.forEach(event => {
-                const listItem = document.createElement('li');
-                listItem.classList.add('event');
-
-                listItem.innerHTML = `
-                    <div class='event-desc'>
-                        <h3><a href='#' onclick='showLayers("${event.title}", "${event.link}");'>${event.title}</a></h3>
-                        <p>House: ${event.description}</p>
-                    </div>
-                    <img src="assets/img/categories/${event.id}.png" alt="${event.title}">
-                `;
-                eventList.appendChild(listItem);
-            });
-        })
-        .catch(error => console.error('Error fetching categories:', error));
-}
+     $.getJSON(nasa_eonet_endpoint + "/categories")
+         .done(data => {
+             const eventList = $("#eventList");
+             eventList.empty(); // Clear previous entries
+ 
+             // Filter matching events
+             const filteredCategories = data.categories.filter(event => 
+                 workingEoNetEvents.includes(event.title)
+             );
+ 
+             filteredCategories.forEach(event => {
+                 const listItem = `
+                     <li class="event">
+                         <div class='event-desc'>
+                             <h3><a href='#' onclick='showLayers("${event.title}", "${event.link}");'>${event.title}</a></h3>
+                             <p>House: ${event.description}</p>
+                         </div>
+                         <img src="assets/img/categories/${event.id}.png" alt="${event.title}">
+                     </li>
+                 `;
+                 eventList.append(listItem);
+             });
+         })
+         .fail(error => console.error('Error fetching categories:', error));
+ }
  
  function fetchEvents() {
-     document.getElementById("eventTitle").innerHTML = '';
-     document.getElementById("eventSelect").style.display = 'block';
-     document.getElementById("layerSelect").style.display = 'none';
-     document.getElementById("map").style.display = 'none';
-     document.getElementById("startDate").value = '';
-     document.getElementById("endDate").value = '';
+     $("#eventTitle").empty();
+     $("#eventSelect").show();
+     $("#layerSelect").hide();
+     $("#map").hide();
+     $("#startDate").val('');
+     $("#endDate").val('');
  }
  
  function searchByDate() {
-     const startDate = document.getElementById('startDate').value;
-     const endDate = document.getElementById('endDate').value;
-     const limit = document.getElementById('limit').value;
+     const startDate = $('#startDate').val();
+     const endDate = $('#endDate').val();
+     const limit = $('#limit').val();
      showLayers(event_title, event_link, startDate, endDate, limit);
  }
  
@@ -107,21 +103,21 @@
      event_link = link || event_link;
      event_title = title || event_title;
  
-     document.getElementById("eventTitle").innerHTML = ' > ' + event_title;
+     $("#eventTitle").html(' > ' + event_title);
  
-     let queryParams = new URLSearchParams({ source: sourcesList.join(','), limit: limit });
+     let queryParams = $.param({ source: sourcesList.join(','), limit: limit });
  
      geoData = [];
      markers = [];
  
-     if (startDate) queryParams.append('start', startDate);
-     if (endDate) queryParams.append('end', endDate);
+     if (startDate) queryParams += `&start=${startDate}`;
+     if (endDate) queryParams += `&end=${endDate}`;
  
-     document.getElementById("eventSelect").style.display = 'none';
-     document.getElementById("layerSelect").style.display = 'block';
-     document.getElementById("map").style.display = 'block';
+     $("#eventSelect").hide();
+     $("#layerSelect").show();
+     $("#map").show();
  
-     fetch(event_link + '?' + queryParams.toString())
+     fetch(`${event_link}?${queryParams}`)
          .then(response => response.json())
          .then(linkData => {
              let categoryData = '';
@@ -131,7 +127,7 @@
                  categoryData += `<dd><a onclick='showMap(${location});'>${layerItem.title}</a></dd>`;
              });
  
-             document.getElementById("layerList").innerHTML = categoryData;
+             $("#layerList").html(categoryData);
              displayMap();
          });
  }
